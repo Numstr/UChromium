@@ -57,21 +57,24 @@ for /f %%C in ('tasklist /NH /FI "IMAGENAME eq chrome.exe"') do if %%C == chrome
 
 ::::::
 
-set UCHROM="https://github.com/ungoogled-software/ungoogled-chromium-windows/releases/download/%VERSION%/ungoogled-chromium_%VERSION%_windows_%ARCH%.zip"
-
 if exist "TMP" rmdir "TMP" /s /q
 mkdir "TMP"
 
+set UCHROM="https://github.com/ungoogled-software/ungoogled-chromium-windows/releases/download/%VERSION%/ungoogled-chromium_%VERSION%_windows_%ARCH%.zip"
+
 %CURL% -# -k -L %UCHROM% -o TMP\UChromium_%VERSION%_%ARCH%.zip
 
-%SZIP% x -aoa TMP\UChromium_%VERSION%_%ARCH%.zip -o"TMP\"
-
 if exist "App\UChromium" rmdir "App\UChromium" /s /q
+
+%SZIP% x -aoa TMP\UChromium_%VERSION%_%ARCH%.zip -o"App\UChromium" > NUL
+
 robocopy /MOVE /S TMP\ungoogled-chromium_%VERSION%_windows App\UChromium /NFL /NDL /NJH /NJS
+
+::::::::::::::::::::
 
 rmdir "TMP" /s /q
 
-::::::::::::::::::::
+echo Done
 
 pause
 
