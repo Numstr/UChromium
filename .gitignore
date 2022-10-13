@@ -9,5 +9,6 @@ App/*
 !.editorconfig
 !.gitignore
 !README.md
+!UChromium.exe
 !UChromium.ini
 !Updater.bat
