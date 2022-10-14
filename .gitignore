@@ -6,6 +6,7 @@
 App/*
 !App/AppInfo/
 !App/Utils/
+!WidevineCdm/
 !.editorconfig
 !.gitignore
 !README.md
