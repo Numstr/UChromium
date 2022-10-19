@@ -74,7 +74,7 @@ robocopy /MOVE /S TMP\ungoogled-chromium_%VERSION%_windows App\UChromium /NFL /N
 
 :::::: WIDEVINE CDM
 
-set WIDEVINE="https://github.com/Numstr/UChromium/releases/download/latest/WidevineCdm_%ARCH%.zip"
+set WIDEVINE="https://github.com/Numstr/UChromium/raw/main/WidevineCdm/WidevineCdm_%ARCH%.zip"
 :: https://dl.google.com/widevine-cdm/4.10.2449.0-win-%ARCH%.zip
 
 echo Get Widevine Cdm
