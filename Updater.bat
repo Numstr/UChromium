@@ -46,6 +46,8 @@ if exist "version.txt" del "version.txt" > NUL
 
 :::::: RUNNING PROCESS CHECK
 
+if not exist tasklist goto GET
+
 for /f %%C in ('tasklist /NH /FI "IMAGENAME eq chrome.exe"') do if %%C == chrome.exe (
   echo Close Cromium To Update
   pause
@@ -53,6 +55,8 @@ for /f %%C in ('tasklist /NH /FI "IMAGENAME eq chrome.exe"') do if %%C == chrome
 )
 
 ::::::::::::::::::::
+
+:GET
 
 :::::: GET LATEST VERSION
 
@@ -86,9 +90,9 @@ echo Get Widevine Cdm
 
 %SZIP% x -aoa TMP\WidevineCdm_%ARCH%.zip -o"App\UChromium\WidevineCdm" > NUL
 
-::::::::::::::::::::
-
 rmdir "TMP" /s /q
+
+::::::::::::::::::::
 
 echo Done
 
