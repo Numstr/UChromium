@@ -46,10 +46,10 @@ if exist "version.txt" del "version.txt" > NUL
 
 :::::: RUNNING PROCESS CHECK
 
-if not exist tasklist goto GET
+if not exist "%WINDIR%\system32\tasklist.exe" goto GET
 
-for /f %%C in ('tasklist /NH /FI "IMAGENAME eq chrome.exe"') do if %%C == chrome.exe (
-  echo Close Cromium To Update
+for /f %%C in ('tasklist /NH /FI "IMAGENAME eq uchrome.exe"') do if %%C == uchrome.exe (
+  echo Close UCromium To Update
   pause
   exit
 )
@@ -76,6 +76,8 @@ if exist "App\UChromium" rmdir "App\UChromium" /s /q
 %SZIP% x -aoa TMP\UChromium_%VERSION%_%ARCH%.zip -o"TMP\" > NUL
 
 robocopy /MOVE /S TMP\ungoogled-chromium_%VERSION%_windows App\UChromium /NFL /NDL /NJH /NJS
+
+if exist "App\UChromium\chrome.exe" ren "App\UChromium\chrome.exe" "uchrome.exe"
 
 ::::::::::::::::::::
 
