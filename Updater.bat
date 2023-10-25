@@ -5,12 +5,11 @@ cd /d %~dp0
 set HERE=%~dp0
 
 set BUSYBOX="%HERE%App\Utils\busybox.exe"
-set CURL="%HERE%App\Utils\curl.exe"
 set SZIP="%HERE%App\Utils\7za.exe"
 
 :::::: NETWORK CHECK
 
-%CURL% -I -s www.google.com | %BUSYBOX% grep -q "403"
+%BUSYBOX% wget -q --user-agent="Mozilla" --spider https://google.com
 
 if "%ERRORLEVEL%" == "1" (
   echo Check Your Network Connection
@@ -35,7 +34,7 @@ if "%PROCESSOR_ARCHITECTURE%" == "x86" (
 
 :::::: VERSION CHECK
 
-%CURL% -I -k -s https://github.com/ungoogled-software/ungoogled-chromium-windows/releases/latest | %BUSYBOX% grep -o tag/[0-9.]\+[0-9]\-[0-9.]\+[0-9] | %BUSYBOX% cut -d "/" -f2 > version.txt
+%BUSYBOX% wget -q -O - https://github.com/ungoogled-software/ungoogled-chromium-windows/releases/latest | %BUSYBOX% grep -o tag/[0-9.]\+[0-9]\-[0-9.]\+[0-9] | %BUSYBOX% cut -d "/" -f2 > version.txt
 
 for /f %%V in ('more version.txt') do (set VERSION=%%V)
 echo Latest: %VERSION%
@@ -65,7 +64,7 @@ mkdir "TMP"
 
 set UCHROM="https://github.com/ungoogled-software/ungoogled-chromium-windows/releases/download/%VERSION%/ungoogled-chromium_%VERSION%_windows_%ARCH%.zip"
 
-%CURL% -k -L %UCHROM% -o TMP\UChromium_%VERSION%_%ARCH%.zip
+%BUSYBOX% wget %UCHROM% -O TMP\UChromium_%VERSION%_%ARCH%.zip
 
 ::::::::::::::::::::
 
@@ -88,7 +87,7 @@ set WIDEVINE="https://github.com/Numstr/UChromium/raw/main/WidevineCdm/WidevineC
 
 echo Get Widevine Cdm
 
-%CURL% -k -L %WIDEVINE% -o TMP\WidevineCdm_%ARCH%.zip
+%BUSYBOX% wget %WIDEVINE% -O TMP\WidevineCdm_%ARCH%.zip
 
 %SZIP% x -aoa TMP\WidevineCdm_%ARCH%.zip -o"App\UChromium\WidevineCdm" > NUL
 
