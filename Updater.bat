@@ -38,6 +38,7 @@ if "%PROCESSOR_ARCHITECTURE%" == "x86" (
 
 for /f %%V in ('more version.txt') do (set VERSION=%%V)
 echo Latest: %VERSION%
+echo:
 
 if exist "version.txt" del "version.txt" > NUL
 
@@ -70,6 +71,9 @@ set UCHROM="https://github.com/ungoogled-software/ungoogled-chromium-windows/rel
 
 :::::: UNPACKING
 
+echo:
+echo Unpacking
+
 if exist "App\UChromium" rmdir "App\UChromium" /s /q
 
 %SZIP% x -aoa TMP\UChromium_%VERSION%_%ARCH%.zip -o"TMP\" > NUL
@@ -86,14 +90,20 @@ set WIDEVINE="https://github.com/Numstr/UChromium/raw/main/WidevineCdm/WidevineC
 :: https://dl.google.com/widevine-cdm/4.10.2449.0-win-%ARCH%.zip
 
 echo Get Widevine Cdm
+echo:
 
 %BUSYBOX% wget %WIDEVINE% -O TMP\WidevineCdm_%ARCH%.zip
+
+echo:
+echo Unpacking
 
 %SZIP% x -aoa TMP\WidevineCdm_%ARCH%.zip -o"App\UChromium\WidevineCdm" > NUL
 
 rmdir "TMP" /s /q
 
 ::::::::::::::::::::
+
+echo:
 
 echo Done
 
