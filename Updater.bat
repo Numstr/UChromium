@@ -78,7 +78,7 @@ if exist "App\UChromium" rmdir "App\UChromium" /s /q
 
 %SZIP% x -aoa TMP\UChromium_%VERSION%_%ARCH%.zip -o"TMP\" > NUL
 
-robocopy /MOVE /S TMP\ungoogled-chromium_%VERSION%_windows App\UChromium /NFL /NDL /NJH /NJS
+robocopy /MOVE /S TMP\ungoogled-chromium_%VERSION%_windows_%ARCH% App\UChromium /NFL /NDL /NJH /NJS
 
 if exist "App\UChromium\chrome.exe" ren "App\UChromium\chrome.exe" "uchrome.exe"
 
