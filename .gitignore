@@ -7,7 +7,9 @@ App/*
 !App/AppInfo/
 !App/Utils/
 !.github/
-!WidevineCdm/
+!WidevineCdm/*
+!WidevineCdm/WidevineCdm_x64.zip
+!WidevineCdm/WidevineCdm_x86.zip
 !.editorconfig
 !.gitignore
 !README.md
